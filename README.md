@@ -33,7 +33,7 @@ This competition is invite only. If you currently work for, or have a few degree
 
 ## How to Participate
 1. Sign up for Advent of Code here: https://adventofcode.com/2023/auth/login
-2. Send a message to **TBD contact info** Josh, Ben, Kyle to get your Discord and Advent of Code Leaderboard invites.
+2. Contact Ben, Josh, or Kyle to get your Discord and Advent of Code Leaderboard invites.
 3. Join the KC Dev Crew Discord and Leaderboard
 4. From December 1st through 25th solve the daily puzzle. Remember, the puzzle AND the bonus each count as a drawing entry.
     - Please consider submitting your solutions to this repo! For more information see [CODE_SUBMISSIONS.md](CODE_SUBMISSIONS.md)
