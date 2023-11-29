@@ -1,0 +1,3 @@
+[submodule "nicholasrussell/advent-of-code-2023"]
+	path = nicholasrussell
+	url = https://github.com/nicholasrussell/advent-of-code-2023
