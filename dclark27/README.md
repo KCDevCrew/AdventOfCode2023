@@ -8,20 +8,6 @@ Inputs -> src/inputs
 
 ### Install
 
-Create the project.
-
-```bash
-npx degit joaopaulomoraes/reactjs-vite-tailwindcss-boilerplate my-app
-```
-
-Access the project directory.
-
-```bash
-cd my-app
-```
-
-Install dependencies.
-
 ```bash
 pnpm install
 ```
