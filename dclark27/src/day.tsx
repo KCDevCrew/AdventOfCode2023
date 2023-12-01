@@ -1,3 +1,6 @@
+import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
 import { useEffect, useState } from 'react'
 
 export const Day = (props: { day: number }) => {
@@ -14,8 +17,6 @@ export const Day = (props: { day: number }) => {
     }
     if (!inputLoaded) {
       loadInput()
-    } else {
-      runSolution()
     }
   })
 
@@ -31,36 +32,28 @@ export const Day = (props: { day: number }) => {
         Day {day}
       </h2>
       <div className="mt-4 flex w-full items-center justify-between gap-6">
-        <div className="flex w-1/2 flex-col gap-2">
-          <label htmlFor={`input-${day}`} className="text-xs font-bold">
-            Input
-          </label>
-          <textarea
+        <div className="grid w-full gap-1.5">
+          <Label htmlFor={`input-${day}`}>Input</Label>
+          <Textarea
             id={`input-${day}`}
             name={`input-${day}`}
             rows={8}
-            className="rounded-md border-2 border-gray-300 p-2"
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
         </div>
-        <div className="flex w-1/2 flex-col gap-2">
-          <label htmlFor={`result-${day}`} className="text-xs font-bold">
-            Result
-          </label>
-          <textarea
+        <div className="grid w-full gap-1.5">
+          <Label htmlFor={`result-${day}`}>Result</Label>
+          <Textarea
             readOnly
             rows={8}
             id={`result-${day}`}
             name={`result-${day}`}
-            className="rounded-md border-2 border-gray-300 p-2"
             value={result}
           />
         </div>
       </div>
-      <button className="rounded-md border p-2 text-xs" onClick={runSolution}>
-        Run Day {day}
-      </button>
+      <Button onClick={runSolution}>Run Day {day}</Button>
     </div>
   )
 }

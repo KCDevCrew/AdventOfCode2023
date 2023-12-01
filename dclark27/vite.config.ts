@@ -1,4 +1,5 @@
 /// <reference types="vitest" />
+import path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 
@@ -13,5 +14,8 @@ export default defineConfig({
     environment: 'happy-dom',
     setupFiles: '.vitest/setup',
     include: ['**/test.{ts,tsx}'],
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
   },
 })
