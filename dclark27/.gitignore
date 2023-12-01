@@ -1,5 +1,6 @@
 dist
 dist-ssr
+.vscode
 *.local
 
 # dependencies
