@@ -5,8 +5,8 @@ export const ComingSoon = (props: { day: number }) => {
         Day {props.day}
       </h2>
       <div className="mt-4 flex w-full items-center justify-between gap-6">
-        <div className="flex w-1/2 flex-col gap-2">Coming son</div>
-        <div className="flex w-1/2 flex-col gap-2">Coming son</div>
+        <div className="flex w-1/2 flex-col gap-2">Coming soon</div>
+        <div className="flex w-1/2 flex-col gap-2">Coming soon</div>
       </div>
     </div>
   )
