@@ -4,3 +4,6 @@
 [submodule "jpw234/advent_of_code_2023"]
 	path = jpw234
 	url = https://github.com/jpw234/advent_of_code_2023
+[submodule "joshpaq/advent_of_code_2023"]
+	path = joshpaq/advent_of_code_2023
+	url = https://github.com/joshpaq/advent_of_code_2023
