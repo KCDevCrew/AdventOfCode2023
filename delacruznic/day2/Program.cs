@@ -6,6 +6,8 @@ class MainClass
       Console.WriteLine("Advent of code Day 2");
       var cubeConundrum = new CubeConundrum("input.txt");
       int total = cubeConundrum.getEligibleGamesTotal();
-      Console.WriteLine($"Total eligible games {total}");
+      int setSum = cubeConundrum.getSumOfPowerSets();
+      Console.WriteLine($"Part 1: Total eligible games: {total}");
+      Console.WriteLine($"Part 2: Set of sums: {setSum}");
     }
 }
