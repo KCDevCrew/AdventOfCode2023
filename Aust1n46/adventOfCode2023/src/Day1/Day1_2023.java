@@ -50,27 +50,38 @@ public class Day1_2023 {
 				final String line = scanner.nextLine();
 				String firstDigit = "";
 				String lastDigit = "";
-				String word = "";
+				String word3 = "";
+				String word4 = "";
+				String word5 = "";
 				for (char c : line.toCharArray()) {
-					word += String.valueOf(c);
-					if (word.length() > 5) {
-						word = word.substring(1);
+					word3 += c;
+					word4 += c;
+					word5 += c;
+					if (word3.length() > 3) {
+						word3 = word3.substring(1);
+					}
+					if (word4.length() > 4) {
+						word4 = word4.substring(1);
+					}
+					if (word5.length() > 5) {
+						word5 = word5.substring(1);
 					}
 					if (c > 57) { // not a number
-						if (word.length() < 3) {
-							continue;
-						}
-						for (String s : getWordOptions(word)) {
+						for (final String s : List.of(word3, word4, word5)) {
 							if (DIGITS.containsKey(s)) {
+								final String digit = DIGITS.get(s);
 								if (firstDigit.isEmpty()) {
-									firstDigit = DIGITS.get(s);
+									firstDigit = digit;
 								} else {
-									lastDigit = DIGITS.get(s);
+									lastDigit = digit;
 								}
+								break;
 							}
 						}
 					} else {
-						word = "";
+						word3 = "";
+						word4 = "";
+						word5 = "";
 						if (firstDigit.isEmpty()) {
 							firstDigit = String.valueOf(c);
 						} else {
@@ -87,15 +98,5 @@ public class Day1_2023 {
 			e.printStackTrace();
 		}
 		return sum;
-	}
-
-	private static List<String> getWordOptions(final String word) {
-		if (word.length() == 3) {
-			return List.of(word);
-		}
-		if (word.length() == 4) {
-			return List.of(word, word.substring(0, 3), word.substring(1));
-		}
-		return List.of(word, word.substring(0, 4), word.substring(0, 3), word.substring(1), word.substring(2), word.substring(1, 4));
 	}
 }
