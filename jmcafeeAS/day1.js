@@ -1,7 +1,12 @@
-(function() {
-    const calcCode = () => {
+(function day1() {
+
+    const parseDay1Values = (values) => {
+        return values.split("\n");
+    };
+
+    const solveDay1 = () => {
         var result = 0;
-        var codesParsed = codes.split("\n");
+        var codesParsed = parseDay1Values(day1Values);
 
         codesParsed.forEach((code) =>{
             let firstNumber;
@@ -32,20 +37,19 @@
             };
 
             if (firstNumber == null) {
-                console.log("There apprears to be no number in this code '" + code + "'");
+                //console.log("There apprears to be no number in this code '" + code + "'");
                 firstNumber = "0";
             }
             
             let parsedInt = parseInt(firstNumber + lastNumber);
-            console.log(parsedInt);
 
             result += parsedInt;
         });
 
         document.getElementById("day1Result").value = result;
-    }
+    };
     
-    var codes = `eighttkbtzjz6nineeight
+    const day1Values = `eighttkbtzjz6nineeight
     5knjbxgvhktvfcq89onefive
     hnjcrxeightonejnlvm4hstmcsevensix
     trsdgcxcseven39dpmzs
@@ -1047,5 +1051,5 @@
     onethreenfkgrvsevenkczctlgkt7
     `;
 
-    calcCode();
+    solveDay1();
 })();
