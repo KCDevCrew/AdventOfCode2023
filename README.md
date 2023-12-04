@@ -20,13 +20,14 @@ Judged prizes will be awarded Jan 1st based on categories:
 - **TBD**
 
 ### Schedule & Winners
-| Date  | Prizes                   | Winners                  | 
-|-------|--------------------------|--------------------------|
-| 12/4  |                          |                          |
-| 12/11 |                          |                          |
-| 12/18 |                          |                          |
-| 12/25 |                          |                          |
-| 01/01 |                          |                          |
+| Date      | Prizes                   | Winners                  | 
+|-----------|--------------------------|--------------------------|
+| **12/4**  | $25 Amazon Gift Card     |                          |
+|           | $25 Amazon Gift Card     |                          |
+| 12/11     |                          |                          |
+| 12/18     |                          |                          |
+| 12/25     |                          |                          |
+| 01/01     |                          |                          |
 
 ## Eligibility
 This competition is invite only. If you currently work for, or have a few degrees of separation from, a KC technology company then you are invited.
