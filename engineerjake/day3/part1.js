@@ -1,11 +1,16 @@
 const clc = require('cli-color')
 const fs = require('fs')
-const data = fs.readFileSync(process.argv[2], 'utf8').split('\n')
+const data = fs.readFileSync(process.argv[2], 'utf8').split('\r\n')
 
 // Not a digit, not a period, must be a symbol!
 
 const numbers = [] // { v: '', row: null, colS: null, colE: null }
 const symbols = [] // { v: '', row: null, col: null }
+
+const validDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+const isDigit = (char) => {  
+  return validDigits.includes(char)
+}
 
 const lineLength = (data[0]) ? data[0].length : 0
 
@@ -15,7 +20,8 @@ for (let row = 0; row < data.length; row++) {
 
   for (let col = 0; col < lineLength; col++) {
     const char = line[col]
-    if (char.match(/[0-9]/)) { // it's a digit!
+    // console.log('checking if char is number', row, col, char)
+    if (isDigit(char)) { // it's a digit!
       if (cNum.row === null) cNum.row = row
       if (cNum.colS === null) cNum.colS = col
       cNum.v += char
@@ -103,9 +109,9 @@ for (let row = 0; row < data.length; row++) {
   let cNum = { v: '', row: null, colS: null, colE: null }
 
   let lineOutput = ''
-  for (let col = 0; col < lineLength; col++) {
+  for (let col = 0; col < lineLength -1; col++) {
     const char = line[col]
-    if (char.match(/[0-9]/)) { // it's a digit!
+    if (isDigit(char)) { // it's a digit!
       if (cNum.row === null) cNum.row = row
       if (cNum.colS === null) cNum.colS = col
       cNum.v += char
@@ -114,7 +120,7 @@ for (let row = 0; row < data.length; row++) {
       if (cNum.v !== '') {
         // Determine if the number was hit or not
         const num = numbers.find(n => {
-          return (n.row === row && n.colS === cNum.colS)
+          return (n.row === cNum.row && n.colS === cNum.colS)
         })
         lineOutput += (num.hit) ? clc.greenBright(cNum.v) : clc.blackBright(cNum.v)
 

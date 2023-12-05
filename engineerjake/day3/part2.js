@@ -7,6 +7,11 @@ const data = fs.readFileSync(process.argv[2], 'utf8').split('\n')
 const numbers = [] // { v: '', row: null, colS: null, colE: null }
 const gears = [] // { v: '', row: null, col: null, parts: [] }
 
+const validDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+const isDigit = (char) => {  
+  return validDigits.includes(char)
+}
+
 const lineLength = (data[0]) ? data[0].length : 0
 
 for (let row = 0; row < data.length; row++) {
@@ -15,7 +20,7 @@ for (let row = 0; row < data.length; row++) {
 
   for (let col = 0; col < lineLength; col++) {
     const char = line[col]
-    if (char.match(/[0-9]/)) { // it's a digit!
+    if (isDigit(char)) { // it's a digit!
       if (cNum.row === null) cNum.row = row
       if (cNum.colS === null) cNum.colS = col
       cNum.v += char
@@ -114,7 +119,7 @@ for (let row = 0; row < data.length; row++) {
   let lineOutput = ''
   for (let col = 0; col < lineLength; col++) {
     const char = line[col]
-    if (char.match(/[0-9]/)) { // it's a digit!
+    if (isDigit(char)) { // it's a digit!
       if (cNum.row === null) cNum.row = row
       if (cNum.colS === null) cNum.colS = col
       cNum.v += char
