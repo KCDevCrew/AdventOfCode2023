@@ -11,7 +11,7 @@ export const Day = (props: { day: number }) => {
 
 	useEffect(() => {
 		const loadInput = async () => {
-			const input = await import(`./inputs/day-${day}`);
+			const input = await import(/* @vite-ignore */ `./inputs/day-${day}`);
 			setInput(input.input);
 			setInputLoaded(true);
 		};
@@ -21,7 +21,11 @@ export const Day = (props: { day: number }) => {
 	});
 
 	const runSolution = async () => {
-		const { solution } = await import(`./solutions/solution-day-${props.day}`);
+		/* @vite-ignore */
+		const { solution } = await import(
+			/* @vite-ignore */
+			`./solutions/solution-day-${props.day}`
+		);
 		const result = solution(input);
 		setResult(result);
 	};

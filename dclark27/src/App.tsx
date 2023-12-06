@@ -3,7 +3,7 @@ import { ComingSoon } from 'coming-soon';
 
 function App() {
 	const days = Array.from({ length: 25 }, (_, i) => i + 1);
-	const completedDays = [1, 2, 3];
+	const completedDays = [1, 2, 3, 4];
 
 	return (
 		<main className='container mx-auto flex flex-col font-mono'>
