@@ -22,8 +22,10 @@ Judged prizes will be awarded Jan 1st based on categories:
 ### Schedule & Winners
 | Date      | Prizes                   | Winners                  | 
 |-----------|--------------------------|--------------------------|
-| **12/4**  | $25 Amazon Gift Card     |                          |
-|           | $25 Amazon Gift Card     |                          |
+| **12/4**  | $25 Amazon Gift Card     | Jared Wright             |
+|           | $25 Amazon Gift Card     | engineerjake             |
+|           | $25 Amazon Gift Card     | baubry                   |
+|           | $25 Amazon Gift Card     | rflctvEQ                 |
 | 12/11     |                          |                          |
 | 12/18     |                          |                          |
 | 12/25     |                          |                          |
