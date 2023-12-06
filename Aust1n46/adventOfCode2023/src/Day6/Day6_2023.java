@@ -38,6 +38,7 @@ public class Day6_2023 {
 		return total;
 	}
 
+	// brute force because it's faster than writing the optimal solution...
 	private static long getTotalPartTwo() {
 		long total = 1;
 		try (final Scanner scanner = new Scanner(new File("src/Day6/input2.txt"))) {
@@ -57,6 +58,7 @@ public class Day6_2023 {
 		return total;
 	}
 
+	// optimal solution O(1)
 	private static String getTotalPartTwoProper() {
 		String total = "";
 		try (final Scanner scanner = new Scanner(new File("src/Day6/input2.txt"))) {
