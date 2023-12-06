@@ -97,4 +97,4 @@ Game 96: 3 red, 5 blue, 1 green; 3 blue, 14 red, 2 green; 7 blue, 3 red, 2 green
 Game 97: 17 red, 8 green, 6 blue; 8 blue, 9 green; 4 green, 18 red
 Game 98: 9 blue, 2 green; 4 red, 6 blue, 3 green; 2 red; 14 red, 12 blue
 Game 99: 4 red, 3 green, 3 blue; 2 red, 2 blue; 7 green, 3 blue; 5 red, 2 green
-Game 100: 5 green, 7 red, 4 blue; 11 green, 9 red, 8 blue; 2 blue, 12 green`
+Game 100: 5 green, 7 red, 4 blue; 11 green, 9 red, 8 blue; 2 blue, 12 green`;
