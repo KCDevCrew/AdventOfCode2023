@@ -1,9 +1,8 @@
 package Day7;
 
-import static java.util.stream.IntStream.range;
-
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Scanner;
+import java.util.stream.IntStream;
 
 class Hand implements Comparable<Hand> {
 	final String cards;
@@ -34,7 +33,8 @@ class Hand implements Comparable<Hand> {
 				tier = 7;
 				return;
 			}
-			final var maxCardCount = cardCounts.entrySet().stream().max(Comparator.comparing(Map.Entry::getValue)).get();
+			final var maxCardCount = cardCounts.entrySet().stream().max(Comparator.comparing(Map.Entry::getValue))
+					.get();
 			cardCounts.put(maxCardCount.getKey(), maxCardCount.getValue() + numJokers);
 		}
 
@@ -109,22 +109,16 @@ class Hand implements Comparable<Hand> {
 }
 
 public class Day7_2023 {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		System.out.println(getTotalPart(false));
 		System.out.println(getTotalPart(true));
 	}
 
-	private static int getTotalPart(final boolean isJokerHand) {
+	private static int getTotalPart(final boolean isJokerHand) throws IOException {
 		final List<Hand> hands = new ArrayList<>();
-		try (final Scanner scanner = new Scanner(new File("src/Day7/input.txt"))) {
-			while (scanner.hasNextLine()) {
-				final String line = scanner.nextLine();
-				hands.add(new Hand(line.substring(0, 5), Integer.parseInt(line.substring(6)), isJokerHand));
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		Files.lines(Path.of("src/Day7/input.txt"))
+				.forEach(x -> hands.add(new Hand(x.substring(0, 5), Integer.parseInt(x.substring(6)), isJokerHand)));
 		Collections.sort(hands);
-		return range(0, hands.size()).reduce(0, (t, x) -> t + (hands.get(x).bid * (x + 1)));
+		return IntStream.range(0, hands.size()).reduce(0, (t, x) -> t + (hands.get(x).bid * (x + 1)));
 	}
 }
