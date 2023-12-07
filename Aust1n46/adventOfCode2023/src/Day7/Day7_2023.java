@@ -17,13 +17,13 @@ class Hand implements Comparable<Hand> {
 	final String cards;
 	final int bid;
 	final boolean isJokerHand;
-	final Map<Character, Integer> cardCounts = new HashMap<>();
-	int tier = 1;
+	final int tier;
 
 	Hand(final String cards, final int bid, final boolean isJokerHand) {
 		this.cards = cards;
 		this.bid = bid;
 		this.isJokerHand = isJokerHand;
+		final Map<Character, Integer> cardCounts = new HashMap<>();
 		for (char c : cards.toCharArray()) {
 			cardCounts.put(c, cardCounts.getOrDefault(c, 0) + 1);
 		}
@@ -66,6 +66,8 @@ class Hand implements Comparable<Hand> {
 			}
 		} else if (hasPair) {
 			tier = 2;
+		} else {
+			tier = 1;
 		}
 	}
 
