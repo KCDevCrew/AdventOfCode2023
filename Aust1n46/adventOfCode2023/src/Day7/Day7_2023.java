@@ -82,18 +82,10 @@ class Hand implements Comparable<Hand> {
 				if (otherCardValue == thisCardValue) {
 					continue;
 				}
-				if (otherCardValue > thisCardValue) {
-					return -1;
-				} else {
-					return 1;
-				}
+				return otherCardValue > thisCardValue ? -1 : 1;
 			}
 		} else {
-			if (other.tier > this.tier) {
-				return -1;
-			} else {
-				return 1;
-			}
+			return other.tier > this.tier ? -1 : 1;
 		}
 		return 0;
 	}
