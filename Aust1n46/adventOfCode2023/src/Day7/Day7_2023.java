@@ -1,5 +1,7 @@
 package Day7;
 
+import static java.util.stream.IntStream.range;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.IntStream;
 
 class Hand implements Comparable<Hand> {
 	final String cards;
@@ -119,6 +120,6 @@ public class Day7_2023 {
 		Files.lines(Path.of("src/Day7/input.txt"))
 				.forEach(x -> hands.add(new Hand(x.substring(0, 5), Integer.parseInt(x.substring(6)), isJokerHand)));
 		Collections.sort(hands);
-		return IntStream.range(0, hands.size()).reduce(0, (t, x) -> t + (hands.get(x).bid * (x + 1)));
+		return range(0, hands.size()).reduce(0, (t, x) -> t + (hands.get(x).bid * (x + 1)));
 	}
 }
