@@ -1,4 +1,9 @@
 (function day3() {
+    const main = () => {
+        solveDay3();
+        solveDay3Part2();
+    }
+    
     const parseDay3Values = (values) => {
         return values.split("\n");
     };
@@ -23,10 +28,13 @@
                     partNumber = getPartNumber(schematicLine, l);
                 }
                 
-                if (checkCurrentColumn(schematicLines, s, l) === true || checkPreviousColumn(schematicLines, s, l) === true || checkNextColumn(schematicLines, schematicLine, s, l) === true) {
+                if (checkCurrentColumnIsSpecial(schematicLines, s, l) === true
+                    || checkPreviousColumnIsSpecial(schematicLines, s, l) === true
+                    || checkNextColumnIsSpecial(schematicLines, schematicLine, s, l) === true
+                ) {
                     result += partNumber;
 
-                    console.log("Adding part: " + partNumber);
+                    //console.log("Adding part: " + partNumber);
 
                     // jump ahead to the next potential number
                     l = jumpToEndOfNumber(schematicLine, l);
@@ -42,12 +50,53 @@
         document.getElementById("day3Result").value = result;
     };
 
+    const solveDay3Part2 = () => {
+        let result = 0;
+        let schematicLines = parseDay3Values(day3Values);
+        let gears = {};
+
+        for (let s = 0; s < schematicLines.length; s++) {
+            let schematicLine = schematicLines[s];
+
+            for (let l = 0; l < schematicLine.length; l++) {
+                let currentChar = schematicLine[l];
+                let isNumber = !isNaN(currentChar);
+                
+                if (isNumber !== true) {
+                    continue;
+                }
+
+                let partNumber = getPartNumber(schematicLine, l);
+
+                scanForGears(gears, schematicLines, s, l, partNumber);
+
+                l = jumpToEndOfNumber(schematicLine, l);
+            }
+        }
+
+        for (let g in gears) {
+            let gear = gears[g];
+
+            for (let l in gear) {
+                let partList = gear[l];
+
+                if (partList.parts.length === 2) {
+                    console.log(`Location: [${g}][${l}] ~~ Parts: ${partList.parts[0]}, ${partList.parts[1]}`);
+
+                    result += (partList.parts[0] * partList.parts[1]);
+                }
+            }
+        }
+
+        document.getElementById("day3ResultPart2").value = result;
+    };
+
     const jumpToEndOfNumber = (line, index) => {
         for (let i = index; i < line.length; i++) {
             let currentChar = line[i];
             
             if (isNaN(currentChar)) {
-                return i - 1; //our next interation will increment 1 forward.
+                return i - 1; // our next interation will increment 1 forward.
             }
         }
 
@@ -70,7 +119,71 @@
         return parseInt(partNumber);
     };
 
-    const checkCurrentColumn = (schematicLines, s, l) => {
+    /*
+     * Check each character around a number and note any astricks addresses.
+     * Assumes the character is the first char of a part number.
+     */
+    const scanForGears = (gears, schematicLines, s, l, partNumber) => {
+        let partLength = partNumber.toString().length;
+        
+        // left
+        if (l !== 0 && schematicLines[s][l - 1] === "*") {
+            upsertGearValue(gears, { s: s, l: l - 1 }, partNumber);
+        }
+
+        // above left
+        if (s !== 0 && l !== 0 && schematicLines[s - 1][l - 1] === "*") {
+            upsertGearValue(gears, { s: s - 1, l: l - 1 }, partNumber);
+        }
+
+        // below left
+        if (s < schematicLines.length - 1 && l !== 0 && schematicLines[s + 1][l - 1] === "*") {
+            upsertGearValue(gears, { s: s + 1, l: l - 1 }, partNumber);
+        }
+        
+        // above and below
+        for (let i = l; i < l + partLength; i++) {
+            // above
+            if (s !== 0 && schematicLines[s - 1][i] === "*") {
+                upsertGearValue(gears, { s: s - 1, l: i }, partNumber);
+            }
+
+            // below
+            if (s < schematicLines.length - 1 && schematicLines[s + 1][i] === "*") {
+                upsertGearValue(gears, { s: s + 1, l: i }, partNumber);
+            }
+        }
+
+        // right
+        let endIndex = l + partLength;
+        if (l < schematicLines[s].length - 1 && schematicLines[s][endIndex] === "*") {
+            upsertGearValue(gears, { s: s, l: endIndex }, partNumber);
+        }
+
+        // above right
+        if (s !== 0 && endIndex < schematicLines[s].length - 1 && schematicLines[s - 1][endIndex] === "*") {
+            upsertGearValue(gears, { s: s - 1, l: endIndex }, partNumber);
+        }
+
+        // bottom right
+        if (s < schematicLines.length - 1 && endIndex < schematicLines[s].length - 1 && schematicLines[s + 1][endIndex] === "*") {
+            upsertGearValue(gears, { s: s + 1, l: endIndex }, partNumber);
+        }
+    };
+
+    const upsertGearValue = (gears, address, partNumber) => {
+        if (gears[address.s] === undefined) {
+            gears[address.s] = {};
+        }
+
+        if (gears[address.s][address.l] === undefined) {
+            gears[address.s][address.l] = { parts: [] };
+        }
+
+        gears[address.s][address.l].parts.push(partNumber);
+    }
+
+    const checkCurrentColumnIsSpecial = (schematicLines, s, l) => {
         if (s !== 0 && isSpecialChar(schematicLines[s - 1][l])) {
             return true;
         }
@@ -86,19 +199,22 @@
     s represents the schemaic line we are on.
     l represents the character in the line we are on.
     */
-    const checkPreviousColumn = (schematicLines, s, l) => {
+    const checkPreviousColumnIsSpecial = (schematicLines, s, l) => {
         if (l === 0) {
-            return false;
+            return null;
         }
 
+        // left
         if (isSpecialChar(schematicLines[s][l - 1])) {
             return true;
         }
 
+        // upper left
         if (s !== 0 && isSpecialChar(schematicLines[s - 1][l - 1])) {
             return true;
         }
 
+        // bottom left
         if (s < schematicLines.length - 1 && isSpecialChar(schematicLines[s + 1][l - 1])) {
             return true;
         }
@@ -110,19 +226,22 @@
     s represents the schemaic line we are on.
     l represents the character in the line we are on.
     */
-    const checkNextColumn = (schematicLines, line, s, l) => {
+    const checkNextColumnIsSpecial = (schematicLines, line, s, l) => {
         if (l === line.length - 1) {
             return false;
         }
 
+        // right
         if (isSpecialChar(schematicLines[s][l + 1])) {
             return true;
         }
 
+        // upper right
         if (s !== 0 && isSpecialChar(schematicLines[s - 1][l + 1])) {
             return true;
         }
 
+        // bottom right
         if (s < schematicLines.length - 1 && isSpecialChar(schematicLines[s + 1][l + 1])) {
             return true;
         }
@@ -288,5 +407,5 @@
 ...............726.....308.............%........*...../.+........=..../146.................*...................509..........*........593....
 930.........................823..............994.................................100.....857.......................708.220.184..............`;
 
-    solveDay3();
+    main();
 })();

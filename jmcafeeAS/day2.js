@@ -1,4 +1,9 @@
 (function day2() {
+    const main = () => {
+        solveDay2();
+        solveDay2Part2();
+    }
+    
     const parseDay2Values = (values) => {
         let games = values.split("\n");
         let parsedGames = [];
@@ -62,6 +67,37 @@
         });
 
         document.getElementById("day2Result").value = result;
+    };
+
+    const solveDay2Part2 = () => {
+        let games = parseDay2Values(day2values);
+        let result = 0;
+
+        games.forEach((game) => {
+            let highestRed = 0;
+            let highestGreen = 0;
+            let highestBlue = 0;
+
+            for (let g in game.grabs) {
+                let grab = game.grabs[g];
+
+                if (grab.red > highestRed) highestRed = grab.red;
+
+                if (grab.green > highestGreen) highestGreen = grab.green;
+
+                if (grab.blue > highestBlue) highestBlue = grab.blue;
+            }
+
+            // console.log("-------");
+            // console.log("HighestRed: " + highestRed);
+            // console.log("HighestGreen: " + highestGreen);
+            // console.log("HighestBlue: " + highestBlue);
+            // console.log(game.grabs);
+
+            result += (highestRed * highestGreen * highestBlue);
+        });
+
+        document.getElementById("day2ResultPart2").value = result;
     };
 
     const totalRedCubes = 12;
@@ -169,5 +205,5 @@ Game 98: 9 red, 12 green, 2 blue; 1 blue, 11 green, 10 red; 10 red, 2 green
 Game 99: 4 red, 13 blue, 7 green; 7 green, 5 blue, 6 red; 7 green, 11 blue; 10 green, 2 red, 8 blue
 Game 100: 2 green, 1 blue; 9 red, 8 green, 1 blue; 4 red, 10 green, 1 blue; 17 green, 8 red; 5 green, 1 blue, 7 red; 14 red, 12 green`;
 
-    solveDay2();
-}())
+    main();
+}());

@@ -1,5 +1,10 @@
 (function day1() {
 
+    const main = () => {
+        solveDay1();
+        solveDay1Part2();
+    }
+
     const parseDay1Values = (values) => {
         return values.split("\n");
     };
@@ -48,6 +53,83 @@
 
         document.getElementById("day1Result").value = result;
     };
+
+    const solveDay1Part2 = () => {
+        var result = 0;
+        var codesParsed = parseDay1Values(day1Values);
+
+        codesParsed.forEach((code) =>{
+            let firstNumber;
+            let lastNumber;
+            
+            // first number
+            for (let f = 0; f < code.length; f++) {
+                let number = parseNumber(f, code, true);
+                
+                if (number !== null) {
+                    firstNumber = number;
+                    break;
+                }
+            };
+
+            // last number
+            for (let l = code.length - 1; l > 0; l--) {
+                let number = parseNumber(l, code, false);
+                
+                if (number !== null) {
+                    lastNumber = number;
+                    break;
+                }
+            };
+
+            if (firstNumber == null) {
+                //console.log("There apprears to be no number in this code '" + code + "'");
+                firstNumber = "0";
+            }
+            
+            let parsedInt = parseInt(firstNumber + lastNumber);
+
+            result += parsedInt;
+        });
+
+        document.getElementById("day1ResultPart2").value = result;
+    };
+
+    const parseNumber = (index, line, direction) => {
+        let char = line[index];
+        
+        if (char === " ") {
+            return null;
+        }
+
+        if (!isNaN(char)) {
+            return char;
+        }
+
+        for (let number of numberDictionary) {
+            let parsedNum = direction
+                ? line.substring(index, index + number.key.length)
+                    : line.substring((index + 1) - number.key.length, index + 1);
+
+            if (parsedNum === number.key) {
+                return number.value;
+            }
+        }
+
+        return null;
+    }
+
+    const numberDictionary = [
+        { key: 'one', value: '1' },
+        { key: 'two', value: '2' },
+        { key: 'three', value: '3' },
+        { key: 'four', value: '4' },
+        { key: 'five', value: '5' },
+        { key: 'six', value: '6' },
+        { key: 'seven', value: '7' },
+        { key: 'eight', value: '8' },
+        { key: 'nine', value: '9' }
+    ];
     
     const day1Values = `eighttkbtzjz6nineeight
     5knjbxgvhktvfcq89onefive
@@ -1051,5 +1133,5 @@
     onethreenfkgrvsevenkczctlgkt7
     `;
 
-    solveDay1();
+    main();
 })();
