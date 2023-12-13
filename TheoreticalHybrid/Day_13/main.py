@@ -31,10 +31,10 @@ def checkReflection(pattern, rowNum, allowAdjustments):
 
     while lr >= 0 and rr < len(p): # while inside the bounds of the grid
         leftPattern, rightPattern = p[lr], p[rr] # get the left and right row values
-        if leftPattern == rightPattern: # if they match, mvove the indexes out 1 and repeat
+        if leftPattern == rightPattern: # if they match, move the indexes out 1 and repeat
             lr = lr - 1
             rr += 1
-        else: # if they don't match
+        else: # they don't match
             if allowAdjustments: # if we're allowing adjustments (smudge correction)
                 if rowsOffByOne(leftPattern, rightPattern): # if they're off by one
                     p[lr] = rightPattern # set the left pattern to the value of the right pattern
@@ -42,7 +42,7 @@ def checkReflection(pattern, rowNum, allowAdjustments):
 
                     p[lr] = leftPattern # reset the left pattern to it's original value
                     p[rr] = leftPattern # set the right pattern to the value of the left pattern
-                    return checkReflection(p, rowNum, False) # if this produces a valid grid reflection (disallowing further adjustments) then this is a valid reflection, otherwise it is not
+                    return checkReflection(p, rowNum, False) # if this produces a valid grid reflection (disallowing further adjustments) then this is a valid reflection, otherwise this is not a valid reflection
                 else: return False # they're not off by only one, this is an invalid reflection
             else: return False # no adjustments allowed, this is an invalid reflection
         
@@ -63,13 +63,13 @@ def getReflectionLine(pattern, rotate, blockLine):
                 if rowsOffByOne(row, nextRow): # if the two rows are only off by one character
                     p[i] = nextRow # set this row to be the same as next row
                     if checkReflection(p, i, False) and blockLine != i:
-                        return i # if this produces a valid grid reflection and blockline isn't the same value as i, then this is the answer
+                        return i # if this produces a valid grid reflection (disallowing further adjustments) and blockline isn't the same value as i, then this is the answer
 
                     p[i] = row # reset this row to it's original value
                     p[i+1] = row # set next row to be the same as this row
 
                     if checkReflection(p, i, False) and blockLine != i:
-                        return i # if this produces a valid grid reflection and blockline isn't the same value as i, then this is the answer
+                        return i # if this produces a valid grid reflection (disallowing further adjustments) and blockline isn't the same value as i, then this is the answer
                     
                     p[i+1] = nextRow # reset the next row to it's original value
 
