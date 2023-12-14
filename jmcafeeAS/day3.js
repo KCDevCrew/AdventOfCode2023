@@ -81,7 +81,7 @@
                 let partList = gear[l];
 
                 if (partList.parts.length === 2) {
-                    console.log(`Location: [${g}][${l}] ~~ Parts: ${partList.parts[0]}, ${partList.parts[1]}`);
+                    //console.log(`Location: [${g}][${l}] ~~ Parts: ${partList.parts[0]}, ${partList.parts[1]}`);
 
                     result += (partList.parts[0] * partList.parts[1]);
                 }
