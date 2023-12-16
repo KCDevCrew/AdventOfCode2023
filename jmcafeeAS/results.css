@@ -1,3 +1,61 @@
-h1 {
-    text-decoration-line: overline underline;
+body {
+    font-family:fantasy;
 }
+
+h3 {
+    margin: 0px !important;
+}
+
+.grid-container {
+    display: grid;
+    column-gap: 5px;
+    grid-template-columns: 250px 250px 250px 250px 250px 250px 250px;
+    grid-template-rows: 250px;
+    background: rgb(2,0,36);
+    background: -moz-radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(0,255,128,1) 0%, rgba(70,179,193,1) 34%, rgba(255,3,59,1) 100%);
+    background: -webkit-radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(0,255,128,1) 0%, rgba(70,179,193,1) 34%, rgba(255,3,59,1) 100%);
+    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(0,255,128,1) 0%, rgba(70,179,193,1) 34%, rgba(255,3,59,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#ff033b",GradientType=1);
+    padding: 10px;
+    border-radius: 3px;
+  }
+
+  .grid-item {
+    border-radius: 5px;
+    border: 3px solid rgba(0, 0, 0, 0.8);
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .dayCount {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+    left: -1px;
+    top: -1px;
+  }
+
+  .dayResults {
+    padding-top: 10px;
+    padding-left: 50px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dayResultField {
+    width: auto;
+  }
+
+  .background {
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
